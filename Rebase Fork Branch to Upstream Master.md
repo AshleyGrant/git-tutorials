@@ -22,9 +22,10 @@
 
 ##Create an initial commit and push to GitHub##
 Execute the following commands:
-1. `echo "Edit 1 from upstream:master" > file1.txt`
+
+1. `echo "Edit 1 from upstream/master" > file1.txt`
 2. `git add file1.txt`
-3. `git commit -m "Edit 1 from upstream:master"`
+3. `git commit -m "Commit 1 from upstream/master"`
 4. `git push`
 
 ##Fork the repo from the fork VM##
@@ -35,10 +36,11 @@ Execute the following commands:
 
 ##Create a feature branch on the fork VM and commit a change to `file1.txt`##
 Execute the following commands:
+
 1. `git checkout -b featurebranch`
-2. `echo "Edit 2 from fork:featurebranch" >> file1.txt` (Notice the `>>`. This will append a line to `file1.txt`)
+2. `echo "Edit 1 from fork/featurebranch" >> file1.txt` (Notice the `>>`. This will append a line to `file1.txt`)
 3. `git add file1.txt`
-4. `git commit -m "Edit 1 from fork:featurebranch"`
+4. `git commit -m "Commit 1 from fork/featurebranch"`
 5. `git push origin featurebranch`
 
 ##Create a pull request##
@@ -52,9 +54,10 @@ Execute the following commands:
 We will now simulate another PR being merged before your's. Or simply the upstream repo owner making changes before reviewing your PR.
 
 On the upstream VM, execute the following commands:
-1. `echo "Edit 2 from upstream:master" >> file1.txt` (Notice the `>>`. This will append a line to `file1.txt`)
+
+1. `echo "Edit 2 from upstream/master" >> file1.txt` (Notice the `>>`. This will append a line to `file1.txt`)
 2. `git add file1.txt`
-3. `git commit -m "Edit 2 from upstream:master"`
+3. `git commit -m "Commit 2 from upstream/master"`
 4. `git push`
 
 Now, notice that both the upstream and fork views of the pull request state that the pull request cannot be automatically merged. Let's rebase the fork to pull in the changes and update the pull request.
@@ -70,15 +73,14 @@ This will fail, and we will now need to merge the changes. Use your favorite tex
 
 ```text
 Edit 1 from upstream:master
-Edit 1 from fork:featurebranch
 Edit 2 from fork:featurebranch
-Edit 2 from upstream:master
+Edit 3 from upstream:master
 ```
 Now, let git know that you're done merging and continue the rebase.
 
 1. `git add file1.txt`
 2. `git rebase --continue`
-3. `git push origin featurebranch --force`
+3. `git push --force`
 
 ##Merge the pull request to the upstream repo##
 GitHub automatically updates the pull request. Notice that the pull request pages say that the pull request can be automatically merged now. So, on the upstream VM, click `Merge pull request`
